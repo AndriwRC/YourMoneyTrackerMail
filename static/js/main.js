@@ -24,6 +24,13 @@ function currencySelection() {
     currencySelectionDiv.classList.remove('inactive');
     submitBtn.classList.remove('inactive');
     titleTracker2.classList.remove('inactive');
+    
+    // Inicialmente oculta todos los elementos excepto los dos primeros
+    allCurrencyItems.forEach((item, index) => {
+        if (index >= itemsToShow) {
+            item.classList.add('inactive');
+        }
+    });
 
     // Actualiza el texto del botón según la cantidad de checkboxes seleccionados
     updateButtonCount();
@@ -85,6 +92,8 @@ function updateButtonCount() {
     submitBtn.textContent = selectedCount;
 }
 
+let itemsToShow = 2; // Número inicial de elementos a mostrar
+
 /* Event Listeners */
 
 // Añade un evento de cambio a cada checkbox para actualizar el conteo al cambiar su estado
@@ -116,16 +125,6 @@ subscribeForm.addEventListener('submit', (event) => {
     if (currencySelectionDiv.classList.contains('inactive') && document.activeElement === emailInput) {
         event.preventDefault(); // Prevenir que el formulario se envíe (cuando se presiona enter en el campo de correo electrónico)
         checkEmailValidity(); // Verificar email
-    }
-    // No es necesario un else aquí, si el display no está none, el formulario se enviará normalmente???
-});
-
-let itemsToShow = 2; // Número inicial de elementos a mostrar
-
-// Inicialmente oculta todos los elementos excepto los dos primeros
-allCurrencyItems.forEach((item, index) => {
-    if (index >= itemsToShow) {
-        item.classList.add('inactive');
     }
 });
 
